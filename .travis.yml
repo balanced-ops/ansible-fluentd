@@ -9,6 +9,7 @@ before_install:
 install:
   # Install Ansible.
   - sudo apt-get install ansible -y
+  - sudo sed -i -e's@#roles_path.*@roles_path=../@' /etc/ansible/ansible.cfg
 
 script:
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
