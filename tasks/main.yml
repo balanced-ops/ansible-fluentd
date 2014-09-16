@@ -1,0 +1,17 @@
+---
+
+- debug: var=ansible_distribution
+- debug: var=ansible_distribution_release
+
+- name: checking if td-agent is installed
+  shell: type td-agent >/dev/null 2>&1 || { echo "~none~"; exit 0; }
+  register: tdAgentPath
+  ignore_errors: True
+
+- debug: var=tdAgentPath.stdout
+
+- include: trusty_td-agent.yml
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "trusty"
+
+- include: precise_td-agent.yml
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "precise"

@@ -1,0 +1,12 @@
+---
+
+td_agent_version: '2.0'
+# td_agent_architecture: 'i386'
+td_agent_architecture: 'amd64'
+#td_agent_include: false
+#td_agent_conf: ''
+#td_agent_debug: false
+#td_agent_debug_port: 24230
+#td_agent_http: false
+#td_agent_http_port: 8888
+#td_agent_api_key: None

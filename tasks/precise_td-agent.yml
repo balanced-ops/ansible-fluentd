@@ -1,0 +1,17 @@
+---
+
+- name: install dependencies...
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - python-pycurl
+
+- name: installing the td-agent
+  shell: curl -L http://toolbelt.treasuredata.com/sh/install-ubuntu-precise-td-agent2.sh | sh
+  when: tdAgentPath.stdout == "~none~"
+  notify:
+    - restart td-agent
+
+- name: installing td-agent's kafka plugin
+  shell: td-agent-gem install fluent-plugin-kafka
+  notify:
+    - restart td-agent
