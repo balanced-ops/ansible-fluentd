@@ -13,5 +13,6 @@
 
 - name: installing td-agent's kafka plugin
   shell: td-agent-gem install fluent-plugin-kafka
+  when: tdAgentKafkaPlugin.stdout.find('kafka') == -1
   notify:
     - restart td-agent

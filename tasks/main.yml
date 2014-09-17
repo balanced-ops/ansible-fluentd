@@ -7,8 +7,17 @@
   shell: type td-agent >/dev/null 2>&1 || { echo "~none~"; exit 0; }
   register: tdAgentPath
   ignore_errors: True
+  changed_when: False
 
 - debug: var=tdAgentPath.stdout
+
+- name: checking if td-agent-kafka plugin is installed
+  shell: td-agent-gem list --local fluent-plugin-kafka
+  register: tdAgentKafkaPlugin
+  ignore_errors: True
+  changed_when: False
+
+- debug: var=tdAgentKafkaPlugin.stdout
 
 - include: trusty_td-agent.yml
   when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "trusty"
