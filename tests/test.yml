@@ -18,12 +18,12 @@
       - name: balanced
         pattern: 'balanced.**'
         stores:
-          s3:
-            aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
-            aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
-            s3_prefix: balanced
-            s3_bucket: balanced-logs-us-east-1
-            s3_endpoint: s3.amazonaws.com
+#          s3:
+#            aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+#            aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+#            s3_prefix: balanced
+#            s3_bucket: balanced-logs-us-east-1
+#            s3_endpoint: s3.amazonaws.com
 #          kafka:
 #            servers: ['127.0.0.1']
 #            topics: ['balanced']
@@ -31,7 +31,7 @@
           file:
 
   roles:
-#    - td-agent
+    - td-agent
     - ../../ansible-fluentd
 
 - hosts: fluentd.client*
