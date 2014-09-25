@@ -21,7 +21,7 @@ fluentd:
     aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     # bucket where s3 data will be archived
-    s3_bucket: balanced-logs-us-east-1
+    s3_bucket: balanced-logs-"{{ lookup('env', 'AWS_REGION') }}"
     # which s3 endpoint to use to archive data
     s3_endpoint: s3.amazonaws.com
   # list of kafka servers [127.0.0.1:9999, ...]
@@ -60,15 +60,15 @@ fluentd:
   plugins:
     - fluent-plugin-record-reformer
     - fluent-plugin-kafka
-  services:
-    - name: balanced
-      pattern: 'balanced/**'
-      stores:
-        s3:
-          aws_access_key_id: 123
-          aws_secret_access_key: 456
-          s3_bucket: balanced
-          s3_endpoint: s3.endpoint.com
+  services: {}
+#    - name: balanced
+#      pattern: 'balanced/**'
+#      stores:
+#        s3:
+#          aws_access_key_id: 123
+#          aws_secret_access_key: 456
+#          s3_bucket: balanced-logs-"{{ lookup('env', 'AWS_REGION') | default('us-east-1') }}"
+#          s3_endpoint: s3.endpoint.com
 
 # equivalents of nested collections to make it easy to merge data
 fluentd_in_tail_files: []
