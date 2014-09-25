@@ -21,7 +21,7 @@ fluentd:
     aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     # bucket where s3 data will be archived
-    s3_bucket: balanced-logs-"{{ lookup('env', 'AWS_REGION') }}"
+    s3_bucket: balanced-logs-{{ lookup('env', 'AWS_REGION') }}
     # which s3 endpoint to use to archive data
     s3_endpoint: s3.amazonaws.com
   # list of kafka servers [127.0.0.1:9999, ...]
