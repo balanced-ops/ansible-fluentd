@@ -33,14 +33,14 @@
     - restart td-agent
 
 - name: archive services
-  template: src=matches/service.conf.j2 dest={{ fluentd.config_dir }}/30-service-{{ item.name }}.conf owner={{ fluentd.user }}
+  template: src=matches/service.conf.j2 dest={{ fluentd.config_dir }}/030-service-{{ item.name }}.conf owner={{ fluentd.user }}
   with_items: fluentd.services
   with_items: fluentd_services
   notify:
     - restart td-agent
 
 - name: tail files
-  template: src=sources/tail.conf.j2 dest={{ fluentd.config_dir }}/30-source-tail-{{ item.name }}.conf owner={{ fluentd.user }}
+  template: src=sources/tail.conf.j2 dest={{ fluentd.config_dir }}/030-source-tail-{{ item.name }}.conf owner={{ fluentd.user }}
   with_items: fluentd.in_tail.files
   with_items: fluentd_in_tail_files
   notify:

@@ -15,6 +15,18 @@ fluentd:
   log_dir: /var/log/td-agent
   user: td-agent
   group: td-agent
+  # aws specific info for uploading logs to s3
+  aws:
+    # override above s3 credentials if different
+    aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    # bucket where s3 data will be archived
+    s3_bucket: balanced-logs-us-east-1
+    # which s3 endpoint to use to archive data
+    s3_endpoint: s3.amazonaws.com
+  # list of kafka servers [127.0.0.1:9999, ...]
+  kakfa:
+    servers: []
   in_forward:
     port: 24224
     bind: 0.0.0.0

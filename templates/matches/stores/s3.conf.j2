@@ -3,18 +3,27 @@
 
     check_apikey_on_start false
 
-    {% if item.stores.s3.aws_access_key_id %}
+    {% if item.stores.s3.aws_access_key_id | default(None) %}
         aws_key_id {{ item.stores.s3.aws_access_key_id }}
+    {% elif fluentd.aws.aws_access_key_id | default(None) %}
+        aws_key_id {{ fluentd.aws.aws_access_key_id }}
+    {% elif aws_access_key_id %}
+        aws_key_id {{ aws_access_key_id }}
     {% endif %}
-    {% if item.stores.s3.aws_secret_access_key %}
+
+    {% if item.stores.s3.aws_secret_access_key | default(None) %}
         aws_sec_key {{ item.stores.s3.aws_secret_access_key }}
+    {% elif fluentd.aws.aws_secret_access_key | default(None) %}
+        aws_sec_key {{ fluentd.aws.aws_secret_access_key }}
+    {% elif aws_secret_access_key %}
+        aws_sec_key {{ aws_secret_access_key }}
     {% endif %}
 
-    s3_bucket {{ item.stores.s3.s3_bucket }}
-    s3_endpoint {{ item.stores.s3.s3_endpoint }}
+    s3_bucket {{ item.stores.s3.s3_bucket | default(fluentd.aws.s3_bucket) }}
+    s3_endpoint {{ item.stores.s3.s3_endpoint | default(fluentd.aws.s3_endpoint) }}
 
-    path {{ item.stores.s3.s3_prefix }}/
-    buffer_path {{ fluentd.log_dir }}/s3/{{ item.stores.s3.s3_prefix }}
+    path {{ item.stores.s3.s3_prefix | default(item.name) }}/
+    buffer_path {{ fluentd.log_dir }}/s3/{{ item.stores.s3.s3_prefix | default(item.name) }}
 
     utc
 
