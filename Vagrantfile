@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :ansible do |ansible|
     ansible.playbook       = './tests/test.yml'
-    ansible.inventory_path = './tests/inventory'
+    ansible.inventory_path = './tests/vagrant-inventory'
     ansible.extra_vars = {
         ansible_ssh_user: 'vagrant',
         sudo: true

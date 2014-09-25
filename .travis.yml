@@ -14,5 +14,5 @@ install:
 #  - git clone https://github.com/kawasakitoshiya/ansible-td-agent.git tests/roles/td-agent
 
 script:
-  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
-  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+  - ansible-playbook -i tests/travis-inventory tests/test.yml --syntax-check
+  - ansible-playbook -i tests/travis-inventory tests/test.yml --connection=local --sudo

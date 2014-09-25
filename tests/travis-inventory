@@ -1,0 +1,7 @@
+localhost
+[fluentd.server1]
+localhost
+[fluentd.server2]
+localhost
+[fluentd.client1]
+localhost
