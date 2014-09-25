@@ -13,7 +13,7 @@
       - priority: 99
         name: archive
         options:
-          log_dir: '/tmp'
+          path: 'tmp/'
     fluentd_services:
       - name: balanced
         pattern: 'balanced.**'
