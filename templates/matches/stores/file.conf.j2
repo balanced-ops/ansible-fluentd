@@ -2,5 +2,5 @@
     type file
     utc
     #symlink_path
-    path {{ fluentd.log_dir }}/{{ item.store.file.path | item.name | default('archive') }}
+    path {{ fluentd.log_dir }}/{{ item.store.file.path | default(item.name) | default('archive') }}
 </store>
