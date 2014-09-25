@@ -45,9 +45,3 @@
   with_items: fluentd_in_tail_files
   notify:
     - restart td-agent
-
-- include: server.yml
-  tags: fluentd-server
-
-- include: client.yml
-  tags: fluentd-client

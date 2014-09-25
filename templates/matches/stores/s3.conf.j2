@@ -7,7 +7,7 @@
         aws_key_id {{ item.stores.s3.aws_access_key_id }}
     {% elif fluentd.aws.aws_access_key_id | default(None) %}
         aws_key_id {{ fluentd.aws.aws_access_key_id }}
-    {% elif aws_access_key_id %}
+    {% elif aws_access_key_id | default(None) %}
         aws_key_id {{ aws_access_key_id }}
     {% endif %}
 
@@ -15,7 +15,7 @@
         aws_sec_key {{ item.stores.s3.aws_secret_access_key }}
     {% elif fluentd.aws.aws_secret_access_key | default(None) %}
         aws_sec_key {{ fluentd.aws.aws_secret_access_key }}
-    {% elif aws_secret_access_key %}
+    {% elif aws_secret_access_key | default(None) %}
         aws_sec_key {{ aws_secret_access_key }}
     {% endif %}
 
