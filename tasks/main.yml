@@ -19,14 +19,14 @@
     - restart td-agent
 
 - name: install sources
-  template: src=sources/{{ item.name }}.conf.j2 dest={{ fluentd.config_dir}}/{{ '0%2d' | format(item.priority) }}-source-{{ item.name }}.conf owner={{ fluentd.user }}
+  template: src=sources/{{ item.name }}.conf.j2 dest={{ fluentd.config_dir}}/{{ '%03d' | format(item.priority) }}-source-{{ item.name }}.conf owner={{ fluentd.user }}
   with_items: fluentd.sources
   with_items: fluentd_sources
   notify:
     - restart td-agent
 
 - name: install matches
-  template: src=matches/{{ item.name }}.conf.j2 dest={{ fluentd.config_dir}}/{{ '0%2d' | format(item.priority) }}-match-{{ item.name }}.conf owner={{ fluentd.user }}
+  template: src=matches/{{ item.name }}.conf.j2 dest={{ fluentd.config_dir}}/{{ '%03d' | format(item.priority) }}-match-{{ item.name }}.conf owner={{ fluentd.user }}
   with_items: fluentd.matches
   with_items: fluentd_matches
   notify:
