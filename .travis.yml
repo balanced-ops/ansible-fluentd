@@ -11,7 +11,7 @@ install:
   - sudo apt-get install ansible -y
   - sudo sed -i -e's@#roles_path.*@roles_path=../@' /etc/ansible/ansible.cfg
   - mkdir -p tests/roles/td-agent
-  - git clone https://github.com/kawasakitoshiya/ansible-td-agent.git tests/roles/td-agent
+#  - git clone https://github.com/kawasakitoshiya/ansible-td-agent.git tests/roles/td-agent
 
 script:
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
