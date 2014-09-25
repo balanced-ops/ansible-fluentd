@@ -15,4 +15,4 @@ install:
 
 script:
   - ansible-playbook -i tests/travis-inventory tests/test.yml --syntax-check
-  - ansible-playbook -i tests/travis-inventory tests/test.yml --connection=local --sudo
+  - AWS_ACCESS_KEY_ID='' AWS_SECRET_ACCESS_KEY='' ansible-playbook -i tests/travis-inventory tests/test.yml --connection=local --sudo
