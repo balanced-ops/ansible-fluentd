@@ -1,0 +1,6 @@
+<store>
+    type file
+    utc
+    #symlink_path
+    path {{ fluentd.log_dir }}/{{ item.name | default('archive') }}
+</store>

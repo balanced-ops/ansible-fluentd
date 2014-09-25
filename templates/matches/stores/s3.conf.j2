@@ -1,0 +1,22 @@
+<store>
+    type s3
+
+    check_apikey_on_start false
+
+    {% if item.stores.s3.aws_access_key_id %}
+        aws_key_id {{ item.stores.s3.aws_access_key_id }}
+    {% endif %}
+    {% if item.stores.s3.aws_secret_access_key %}
+        aws_sec_key {{ item.stores.s3.aws_secret_access_key }}
+    {% endif %}
+
+    s3_bucket {{ item.stores.s3.s3_bucket }}
+    s3_endpoint {{ item.stores.s3.s3_endpoint }}
+
+    path {{ item.stores.s3.s3_prefix }}/
+    buffer_path {{ fluentd.log_dir }}/s3/{{ item.stores.s3.s3_prefix }}
+
+    utc
+
+    time_slice_format %Y%m%d%H
+</store>

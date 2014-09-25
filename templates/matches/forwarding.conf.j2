@@ -1,0 +1,38 @@
+<match {{ item.pattern | default('**') }}>
+    type forward
+    send_timeout 60s
+    recover_wait 10s
+    heartbeat_interval 1s
+    phi_threshold 16
+    hard_timeout 60s
+
+    buffer_type memory
+    buffer_chunk_limit 256m
+    buffer_queue_limit 128
+
+    {% for server in fluentd.in_forward.servers %}
+
+    <server>
+        name {{ server }}
+        host {{ server }}
+        port {{ fluentd.in_forward.port }}
+    </server>
+
+    {% endfor %}
+
+    {% for server in item.options.servers %}
+
+    <server>
+        name {{ server }}
+        host {{ server }}
+        port {{ fluentd.in_forward.port }}
+    </server>
+
+    {% endfor %}
+
+    <secondary>
+        type file
+        path {{ fluentd.log_dir }}/forward-failed
+    </secondary>
+
+</match>

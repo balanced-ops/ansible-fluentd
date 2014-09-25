@@ -1,0 +1,11 @@
+# http://docs.fluentd.org/articles/out_file
+<match {{ item.pattern | default('**') }}>
+    type copy
+
+    {% for template, arguments in item.stores.iteritems() %}
+
+{% include 'stores/' + template + '.conf.j2' %}
+
+    {% endfor %}
+
+</match>

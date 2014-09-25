@@ -1,0 +1,8 @@
+<store>
+    type                kafka
+    brokers             {{ item.stores.kafka.servers | join(',') }}
+    default_topic       {{ item.stores.kafka.topics | join(',') }}
+    output_data_type    json
+    output_include_tag  true
+    output_include_time true
+</store>

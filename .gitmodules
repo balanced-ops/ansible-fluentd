@@ -1,0 +1,3 @@
+[submodule "tests/roles/td-agent"]
+	path = tests/roles/td-agent
+	url = https://github.com/kawasakitoshiya/ansible-td-agent.git

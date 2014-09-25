@@ -1,12 +1,66 @@
 ---
+fluentd:
+  td_agent_version: '2.0'
+  # - td_agent_architecture: 'i386'
+  td_agent_architecture: 'amd64'
+  # - td_agent_include: false
+  #- td_agent_conf: ''
+  #- td_agent_debug: false
+  #- td_agent_debug_port: 24230
+  #- td_agent_http: false
+  #- td_agent_http_port: 8888
+  #- td_agent_api_key: None
+  config_dir: /etc/td-agent/conf.d
+  pid_file: /var/run/td-agent/td-agent.pid
+  log_dir: /var/log/td-agent
+  user: td-agent
+  group: td-agent
+  in_forward:
+    port: 24224
+    bind: 0.0.0.0
+    servers: []
+  in_tail:
+    files: []
+    transforms:
+      # TODO: port from https://github.com/balanced-cookbooks/balanced-fluentd/blob/master/attributes/default.rb#L51
+      # these keys (and for any other services) should take the following form:
+      # [namespace]-[classification]-[application-name]-[specialization1]-[specialization...n]
+      # the namespace for balanced is "b".
+      # e.g.
+      # b-access-nginx
+      # b-access-gunicorn
+      # b-error-nginx
+      # b-error-nginx-balanced
+      # b-access-nginx
+      # b-*-nginx-*
+      # b-error-nginx-balanced
+      # b-access-gunicorn-justitia
+      b-access-nginx: no
+      nginx-error: no
+  sources:
+    - priority: 10
+      name: debug
+      options: {}
+  matches:
+    - priority: 1
+      name: reformer
+      options: {}
+  plugins:
+    - fluent-plugin-record-reformer
+    - fluent-plugin-kafka
+  services:
+    - name: balanced
+      pattern: 'balanced/**'
+      stores:
+        s3:
+          aws_access_key_id: 123
+          aws_secret_access_key: 456
+          s3_bucket: balanced
+          s3_endpoint: s3.endpoint.com
 
-td_agent_version: '2.0'
-# td_agent_architecture: 'i386'
-td_agent_architecture: 'amd64'
-#td_agent_include: false
-#td_agent_conf: ''
-#td_agent_debug: false
-#td_agent_debug_port: 24230
-#td_agent_http: false
-#td_agent_http_port: 8888
-#td_agent_api_key: None
+# equivalents of nested collections to make it easy to merge data
+fluentd_in_tail_files: []
+fluentd_services: []
+fluentd_plugins: []
+fluentd_matches: []
+fluentd_sources: []

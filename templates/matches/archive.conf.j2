@@ -1,0 +1,6 @@
+# http://docs.fluentd.org/articles/out_file
+<match {{ item.pattern | default('**') }}>
+type copy
+    {% include 'stores/file.conf.j2' %}
+
+</match>

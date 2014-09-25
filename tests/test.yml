@@ -1,5 +1,57 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: fluentd.server*
+  vars:
+    fluentd_sources:
+      - priority: 20
+        name: forwarding
+        options: {}
+    fluentd_matches:
+      - priority: 10
+        name: debug
+        options:
+          pattern: 'debug.**'
+      - priority: 99
+        name: archive
+        options:
+          log_dir: '/tmp'
+    fluentd_services:
+      - name: balanced
+        pattern: 'balanced.**'
+        stores:
+          s3:
+            aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+            aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+            s3_prefix: balanced
+            s3_bucket: balanced-logs-us-east-1
+            s3_endpoint: s3.amazonaws.com
+#          kafka:
+#            servers: ['127.0.0.1']
+#            topics: ['balanced']
+#          debug:
+          file:
+
   roles:
-    - ansible-fluentd
+#    - td-agent
+    - ../../ansible-fluentd
+
+- hosts: fluentd.client*
+  tasks:
+   - file: path=/var/log/balanced.log state=touch
+     sudo: yes
+
+  vars:
+    fluentd_matches:
+      - priority: 99
+        name: forwarding
+        options:
+          servers: [10.20.3.11, 10.20.3.12, 10.20.3.13]
+    fluentd_in_tail_files:
+      - name: balanced.log
+        path: /var/log/balanced.log
+        format: json
+      - {'name': 'td-agent.log', 'path': '/var/log/td-agent/td-agent.log', 'format': '/^(?<line>.*)$/', 'tag': 'debug.td_agent_client'}
+#      - {'name': 'balanced.nginx.access', 'path': '/var/log/nginx/access.log', 'format': 'balanced-nginx-access', tag: 'debug.nginx.access'}
+#      - {'name': 'balanced.nginx.error', 'path': '/var/log/nginx/error.log', 'format': 'nginx-error', tag: 'debug.nginx.error'}
+  roles:
+    - td-agent
+    - ../../ansible-fluentd

@@ -1,0 +1,7 @@
+## built-in TCP input
+## @see http://docs.fluentd.org/articles/in_forward
+<source>
+  type forward
+  port {{ fluentd.in_forward.port }}
+  bind {{ fluentd.in_forward.bind }}
+</source>

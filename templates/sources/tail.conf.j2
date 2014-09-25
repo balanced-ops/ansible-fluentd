@@ -1,0 +1,9 @@
+<source>
+type tail
+path {{ item.path }}
+{% if item.name %}
+pos_file {{ fluentd.log_dir }}/{{ item.name }}.pos
+{% endif %}
+tag {{ item.tag | default('debug.flog') }}
+format {{ item.format | default('json') }}
+</source>
