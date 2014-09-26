@@ -78,3 +78,4 @@ fluentd_services: []
 fluentd_plugins: []
 fluentd_matches: []
 fluentd_sources: []
+fluentd_s3_path_prefix: 'dev/'

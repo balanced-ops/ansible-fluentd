@@ -22,8 +22,8 @@
     s3_bucket {{ item.stores.s3.s3_bucket | default(fluentd.aws.s3_bucket) }}
     s3_endpoint {{ item.stores.s3.s3_endpoint | default(fluentd.aws.s3_endpoint) }}
 
-    path {{ item.stores.s3.s3_prefix | default(item.name) }}/
-    buffer_path {{ fluentd.log_dir }}/s3/{{ item.stores.s3.s3_prefix | default(item.name) }}
+    path {{ fluentd_s3_path_prefix }}{{ item.stores.s3.s3_prefix | default(item.name) }}/
+    buffer_path {{ fluentd.log_dir }}/s3/{{ fluentd_s3_path_prefix }}{{ item.stores.s3.s3_prefix | default(item.name) }}
 
     utc
 
