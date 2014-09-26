@@ -4,7 +4,7 @@
 # with the payload `{ "channel": "foo.bar"}` will have the routing key rewritten
 # to "foo.bar".
 
-<match **.balog>
+<match {{ item.options.channel | default('**.balog') }}>
     type record_reformer
-    tag ${channel}
+    tag ${{{ item.options.tag | default('channel') }}}
 </match>
