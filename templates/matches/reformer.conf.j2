@@ -1,4 +1,10 @@
-<match **.flog>
-type record_reformer
-tag ${channel}
+# this reformer will rewrite any record that has a channel attribute present in
+# the payload. e.g.
+# a message with key "message.balog" (which is set by default from the tail source)
+# with the payload `{ "channel": "foo.bar"}` will have the routing key rewritten
+# to "foo.bar".
+
+<match **.balog>
+    type record_reformer
+    tag ${channel}
 </match>

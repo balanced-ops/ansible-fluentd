@@ -4,6 +4,6 @@ path {{ item.path }}
 {% if item.name %}
 pos_file {{ fluentd.log_dir }}/{{ item.name }}.pos
 {% endif %}
-tag {{ item.tag | default('debug.flog') }}
+tag {{ item.tag | default('message.balog') }}
 format {{ item.format | default('json') }}
 </source>
