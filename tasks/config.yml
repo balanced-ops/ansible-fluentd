@@ -1,0 +1,36 @@
+---
+
+- name: install plugins
+  command: /usr/lib/fluent/ruby/bin/gem install {{ item }}
+  with_items: fluentd.plugins
+  with_items: fluentd_plugins
+  notify:
+    - restart td-agent
+
+- name: install sources
+  template: src=sources/{{ item.name }}.conf.j2 dest={{ fluentd.config_dir}}/{{ '%03d' | format(item.priority) }}-source-{{ item.name }}.conf owner={{ fluentd.user }}
+  with_items: fluentd.sources
+  with_items: fluentd_sources
+  notify:
+    - restart td-agent
+
+- name: install matches
+  template: src=matches/{{ item.name }}.conf.j2 dest={{ fluentd.config_dir}}/{{ '%03d' | format(item.priority) }}-match-{{ item.name }}.conf owner={{ fluentd.user }}
+  with_items: fluentd.matches
+  with_items: fluentd_matches
+  notify:
+    - restart td-agent
+
+- name: archive services
+  template: src=matches/service.conf.j2 dest={{ fluentd.config_dir }}/030-service-{{ item.name }}.conf owner={{ fluentd.user }}
+  with_items: fluentd.services
+  with_items: fluentd_services
+  notify:
+    - restart td-agent
+
+- name: tail files
+  template: src=sources/tail.conf.j2 dest={{ fluentd.config_dir }}/030-source-tail-{{ item.name }}.conf owner={{ fluentd.user }}
+  with_items: fluentd.in_tail.files
+  with_items: fluentd_in_tail_files
+  notify:
+    - restart td-agent
