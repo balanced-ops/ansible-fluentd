@@ -1,7 +1,7 @@
 <store>
     type                kafka
-    brokers             {{ item.stores.kafka.servers | default(fluentd.kafka.servers) | default(fluentd_kafka_servers) | join(',') }}
-    default_topic       {{ item.stores.kafka.topics | join(',') }}
+    brokers             {{ fluentd_kafka_servers | join(',') }}
+    default_topic       {{ item.stores.kafka.topics | default([item.name]) | join(',') }}
     output_data_type    json
     output_include_tag  true
     output_include_time true
