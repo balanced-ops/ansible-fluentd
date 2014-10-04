@@ -4,7 +4,7 @@
     - fluentd
     - fluentd-install
 
-- include: configure.yml
+- include: config.yml
   tags:
     - fluentd
     - fluentd-configure
