@@ -2,9 +2,9 @@
 - include: install.yml
   tags:
     - fluentd
-    - fluentd-configure
+    - fluentd-install
 
-- include: install.yml
+- include: configure.yml
   tags:
     - fluentd
-    - fluentd-install
+    - fluentd-configure
