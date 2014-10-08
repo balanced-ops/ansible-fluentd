@@ -1,0 +1,14 @@
+# required until https://github.com/bpot/poseidon/issues/64 fixed
+
+- git: repo=https://github.com/bpot/poseidon.git
+       dest=/opt/poseidon
+       version=1155c75177c4ef098a4e9da5c57b6c4bec3b349f
+
+- command: /usr/lib/fluent/ruby/bin/fluent-gem build poseidon.gemspec
+  args:
+    chdir: /opt/poseidon
+    creates: /opt/poseidon/poseidon-0.0.4.gem
+
+- command: /usr/lib/fluent/ruby/bin/fluent-gem install poseidon-0.0.4.gem
+  args:
+    chdir: /opt/poseidon

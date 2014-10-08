@@ -8,3 +8,8 @@
   tags:
     - fluentd
     - fluentd-configure
+
+- include: rubybs.yml
+  tags:
+    - fluentd
+    - fluentd-hacks
