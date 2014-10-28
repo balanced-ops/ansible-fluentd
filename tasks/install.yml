@@ -20,5 +20,7 @@
 
 - name: monit
   template: src=monit.conf.j2 dest=/etc/monit/conf.d/td-agent.conf
+  notify:
+    - restart monit
 
 - monit: name=td-agent state=monitored
