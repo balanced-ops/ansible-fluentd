@@ -15,5 +15,5 @@ galaxy_info:
 
 dependencies:
 
-  - {role: 'git+https://github.com/ANXS/monit.git,,monit'}
-  - {role: 'git+https://github.com/kawasakitoshiya/ansible-td-agent.git,,td-agent'}
+  - {role: 'monit'}
+  - {role: 'td-agent'}
