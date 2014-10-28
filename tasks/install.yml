@@ -23,3 +23,5 @@
   notify:
     - restart monit
     - monitor fluentd
+
+- shell: ls -lR /etc/monit
