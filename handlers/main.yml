@@ -5,3 +5,6 @@
 
 - name: restart monit
   service: name=monit state=restarted
+
+- name: monitor fluentd
+  monit: name=td-agent state=monitored
