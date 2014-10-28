@@ -10,6 +10,7 @@ galaxy_info:
       - precise
   categories:
     - system
-    - ec2
+    - cloud:ec2
+    - logging
 
 dependencies: []
