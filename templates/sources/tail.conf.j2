@@ -5,5 +5,5 @@ path {{ item.path }}
 pos_file {{ fluentd.log_dir }}/{{ item.name }}.pos
 {% endif %}
 tag {{ item.tag | default('message.balog') }}
-format {{ item.format | default('json') }}
+format {{ fluent_d.in_tail.transforms.get(item.format) | default(item.format) | default('json') }}
 </source>

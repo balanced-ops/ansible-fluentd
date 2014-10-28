@@ -51,6 +51,8 @@ fluentd:
       # b-access-gunicorn-justitia
       b-access-nginx: no
       nginx-error: no
+      # parses our postgres log format -
+      b-postgresql: "(?<timestamp>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s\w+)\s(?<pid>\[\d+\]):\s(?<session>\[\d+-\d+\])\suser=(?<user>\w*),db=(?<db>\w*):\s+(?<message>.*)"
   sources:
     - priority: 10
       name: debug
@@ -80,3 +82,5 @@ fluentd_matches: []
 fluentd_sources: []
 fluentd_s3_path_prefix: 'dev/'
 fluentd_kafka_servers: []
+# ip / hostname of servers that you'd like to forward to
+fluentd_in_forward_servers: []

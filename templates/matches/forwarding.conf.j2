@@ -30,6 +30,16 @@
 
     {% endfor %}
 
+    {% for server in fluentd_in_forward_servers %}
+
+        <server>
+            name {{ server }}
+            host {{ server }}
+            port {{ fluentd.in_forward.port }}
+        </server>
+
+    {% endfor %}
+
     <secondary>
         type file
         path {{ fluentd.log_dir }}/forward-failed
