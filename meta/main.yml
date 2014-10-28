@@ -13,4 +13,7 @@ galaxy_info:
     - cloud:ec2
     - logging
 
-dependencies: []
+dependencies:
+
+  - {role: 'Ansibles/monit'}
+
