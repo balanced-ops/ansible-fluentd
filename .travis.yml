@@ -10,9 +10,10 @@ install:
   # Install Ansible.
   - sudo apt-get install ansible -y
   - sudo sed -i -e's@#roles_path.*@roles_path=../@' /etc/ansible/ansible.cfg
-  - mkdir -p tests/roles/td-agent
+  - mkdir -p tests/roles
+  - rm -rf tests/roles
   - git clone https://github.com/kawasakitoshiya/ansible-td-agent.git tests/roles/td-agent
-  - mkdir -p tests/roles/monit
+#  - mkdir -p tests/roles/monit
   - git clone https://github.com/ANXS/monit.git tests/roles/monit
 
 script:
