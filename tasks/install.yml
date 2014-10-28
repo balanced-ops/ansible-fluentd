@@ -18,10 +18,11 @@
   notify:
     - restart td-agent
 
+- shell: ls -lR /etc/monit
+
 - name: monit
   template: src=monit.conf.j2 dest=/etc/monit/conf.d/td-agent.conf
   notify:
     - restart monit
     - monitor fluentd
 
-- shell: ls -lR /etc/monit
