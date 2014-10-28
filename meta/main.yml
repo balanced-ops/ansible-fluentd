@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Balanced
+  description: Ansible role to install and configure fluentd/tdagent
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+    name: Ubuntu
+    version:
+      - precise
+  categories:
+    - system
+
+dependencies: []
