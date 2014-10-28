@@ -17,3 +17,8 @@
   with_items: fluentd_plugins
   notify:
     - restart td-agent
+
+- name: monit
+  template: src=monit.conf.j2 dest=/etc/monit/conf.d/td-agent.conf
+
+- monit: name=td-agent state=monitored
