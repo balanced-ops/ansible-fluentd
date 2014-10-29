@@ -8,3 +8,4 @@
 
 - name: monitor fluentd
   monit: name=td-agent state=monitored
+  ignore_errors: yes
