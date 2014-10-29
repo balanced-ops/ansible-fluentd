@@ -4,7 +4,7 @@
   service: name=td-agent state=restarted enabled=yes
 
 - name: reload monit
-  service: name=monit state=reload
+  service: name=monit state=reloaded
 
 - name: monitor fluentd
   monit: name=td-agent state=monitored
