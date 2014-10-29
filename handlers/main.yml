@@ -3,8 +3,8 @@
 - name: restart td-agent
   service: name=td-agent state=restarted enabled=yes
 
-- name: restart monit
-  service: name=monit state=restarted
+- name: reload monit
+  service: name=monit state=reload
 
 - name: monitor fluentd
   monit: name=td-agent state=monitored
