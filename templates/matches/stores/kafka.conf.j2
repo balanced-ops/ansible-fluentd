@@ -1,3 +1,4 @@
+{% if fluentd_kafka_servers %}
 <store>
     type                kafka
     brokers             {{ fluentd_kafka_servers | join(',') }}
@@ -6,3 +7,4 @@
     output_include_tag  true
     output_include_time true
 </store>
+{% endif %}
