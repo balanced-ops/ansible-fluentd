@@ -12,3 +12,4 @@
 - command: /usr/lib/fluent/ruby/bin/fluent-gem install poseidon-0.0.4.gem
   args:
     chdir: /opt/poseidon
+    creates: /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/poseidon-0.0.4
