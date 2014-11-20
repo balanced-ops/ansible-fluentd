@@ -4,12 +4,32 @@
        dest=/opt/poseidon
        version=1155c75177c4ef098a4e9da5c57b6c4bec3b349f
 
+- stat: path=/usr/lib/fluent/ruby/bin/fluent-gem
+  register: fluent_gem
+
 - command: /usr/lib/fluent/ruby/bin/fluent-gem build poseidon.gemspec
   args:
     chdir: /opt/poseidon
     creates: /opt/poseidon/poseidon-0.0.4.gem
+  when: fluent_gem.stat.exists
 
 - command: /usr/lib/fluent/ruby/bin/fluent-gem install poseidon-0.0.4.gem
   args:
     chdir: /opt/poseidon
     creates: /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/poseidon-0.0.4
+  when: fluent_gem.stat.exists
+
+- stat: path=/usr/sbin/td-agent-gem
+  register: td_agent_gem
+
+- command: /usr/sbin/td-agent-gem build poseidon.gemspec
+  args:
+    chdir: /opt/poseidon
+    creates: /opt/poseidon/poseidon-0.0.4.gem
+  when: td_agent_gem.stat.exists
+
+- command: /usr/sbin/td-agent-gem install poseidon-0.0.4.gem
+  args:
+    chdir: /opt/poseidon
+    creates: /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/poseidon-0.0.4
+  when: td_agent_gem.stat.exists
